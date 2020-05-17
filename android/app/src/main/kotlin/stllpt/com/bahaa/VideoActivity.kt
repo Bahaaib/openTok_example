@@ -1,9 +1,7 @@
-package stllpt.com.flutchat
+package stllpt.com.bahaa
 
 import android.app.Activity
-import android.content.Intent
 import android.opengl.GLSurfaceView
-import android.support.v7.app.AppCompatActivity
 import android.Manifest
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +9,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 import com.opentok.android.Session
 import com.opentok.android.Stream
@@ -23,11 +22,10 @@ import com.opentok.android.BaseVideoRenderer
 import com.opentok.android.OpentokError
 import com.opentok.android.SubscriberKit
 
-import java.util.Date
-
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import stllpt.com.flutchat.R
 
 
 /**
@@ -55,9 +53,9 @@ class VideoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks, 
         setContentView(R.layout.activity_video)
 
         // initialize view objects from your layout
-        mPublisherViewContainer = findViewById<View>(R.id.publisher_container) as FrameLayout
-        mSubscriberViewContainer = findViewById<View>(R.id.subscriber_container) as FrameLayout
-        btnEndCall = findViewById<View>(R.id.btnEndCall) as Button
+        mPublisherViewContainer = findViewById<FrameLayout>(R.id.publisher_container)
+        mSubscriberViewContainer = findViewById(R.id.subscriber_container) as FrameLayout
+        btnEndCall = findViewById(R.id.btnEndCall) as Button
         btnEndCall!!.setOnClickListener {
             if (mSession != null) {
                 val date = mSession!!.connection.creationTime
@@ -204,7 +202,7 @@ class VideoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks, 
     override fun onStreamReceived(session: Session, stream: Stream) {
 
         Log.d(LOG_TAG, "onStreamReceived: New Stream Received " + stream.streamId + " in session: " + session.sessionId)
-        findViewById<View>(R.id.tvWaiting).visibility = View.GONE
+        findViewById<TextView>(R.id.tvWaiting).visibility = View.GONE
         if (mSubscriber == null) {
             mSubscriber = Subscriber.Builder(this, stream).build()
             mSubscriber!!.renderer.setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FILL)

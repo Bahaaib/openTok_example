@@ -1,4 +1,4 @@
-package stllpt.com.flutchat
+package stllpt.com.bahaa
 
 import android.content.Intent
 import android.os.Bundle
@@ -70,7 +70,7 @@ class FirstActivity : FlutterActivity() {
                     methodCall.method?.let {
                         if (it.contentEquals("openVideoChat")) {
                             this@FirstActivity.result = result
-                            startActivityForResult(Intent( this, VideoActivity::class.java), 300)
+                            startActivityForResult(Intent( this, VideoActivity2::class.java), 300)
                         }
                     }
                 }
